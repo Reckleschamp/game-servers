@@ -42,7 +42,7 @@ shutdown_server() {
         log "RCON connection established."
 
         log "Broadcasting shutdown notice to players."
-        if ! send_rcon_command "Broadcast Server shutting down in"; then
+        if ! send_rcon_command "Broadcast Server shutting down."; then
             warn "The RCON Broadcast command failed."
         fi
 

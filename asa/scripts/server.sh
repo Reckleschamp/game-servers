@@ -119,6 +119,7 @@ start_virtual_display() {
 
 start_asa_log_stream() {
     local asa_log_directory=""
+    local start_time="${SECONDS}"
 
     asa_log_directory="$(dirname "${ASA_LOG_FILE}")"
 
@@ -128,13 +129,17 @@ start_asa_log_stream() {
     log "ASA log file: ${ASA_LOG_FILE}"
 
     while [[ ! -f "${ASA_LOG_FILE}" ]]; do
-        sleep 0.1
-
         if [[ -n "${SERVER_PID:-}" ]] &&
             ! kill -0 "${SERVER_PID}" 2>/dev/null; then
             warn "ASA exited before ShooterGame.log was created."
             return
         fi
+
+        if ((SECONDS - start_time >= 60)); then
+            warn "ShooterGame.log was not created within 60 seconds."
+            return
+        fi
+        sleep 0.1
     done
 
     tail -n 0 -F "${ASA_LOG_FILE}" 2>/dev/null &
@@ -161,7 +166,7 @@ wait_for_server_ready() {
     fi
 
     if wait_for_rcon_ready; then
-        print "ASA accepted rcon connection."
+        log "ASA accepted rcon connection."
         return 0
     fi
 

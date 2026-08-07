@@ -4,20 +4,19 @@ A Docker container for running ARK: Survival Ascended dedicated servers with a f
 
 Table of Contents
 
-- [Features] (#Features)
-- [QuickStart] (#Quick Start)
-- [Requirements] (#Requirements)
-- [Ports] (#Ports)
-- [INIConfiguration] (#INI Configuration)
-- [Maps] (#Maps)
-- [Mods] (#Mods)
-- [Extra Server Arguments] (#Extra Server Arguments)
-- [RCON] (#RCON)
-- [Clustering] (#Clustering)
-- [Updating] (#Updating)
-- [Backups] (#Backups)
-- [Logs] (#Logs)
-- [Troubleshooting] (#Troubleshooting)
+- [Features](#Features)
+- [QuickStart](#Quick Start)
+- [Requirements](#Requirements)
+- [Ports](#Ports)
+- [INIConfiguration](#INI Configuration)
+- [Maps](#Maps)
+- [Mods](#Mods)
+- [Extra Server Arguments](#Extra Server Arguments)
+- [RCON](#RCON)
+- [Clustering](#Clustering)
+- [Updating](#Updating)
+- [Backups](#Backups)
+- [Troubleshooting](#Troubleshooting)
 
   
 
@@ -63,24 +62,17 @@ The vm.max_map_count parameter MUST be increased to at least 262144!
 
 You have two methods to apply this setting:
 
-    Temporary Setting (resets after system reboot):
-
-    ```bash
-    sudo sysctl -w vm.max_map_count=262144
-    ```
+Temporary Setting (resets after system reboot):
+```bash sudo sysctl -w vm.max_map_count=262144```
 
     Permanent Setting:
 
-    ```bash
-    echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
-    sudo sysctl -p
-    ```
-
+```bash echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf sudo sysctl -p```
 Storage
 
 Each server instance maintains its own ARK server installation, saves, configuration, logs, and Proton prefix.
 
-At least 25GB of storage on a unmodded server is recommened to allow room for updates and world saves.
+At least 25GB of storage on a unmodded server is recommended to allow room for updates and world saves.
 
 Memory
 
@@ -115,7 +107,7 @@ Edit these files while the server is stopped!
 
 Set the desired map using the map setting in the container configuration.
 
-Offical map names
+Official map names
 ```TheIsland_WP```
 ```ScorchedEarth_WP```
 ```TheCenter_WP```
@@ -157,7 +149,7 @@ Check the wiki for available Arguments.
 
 RCON can be enabled through the container configuration.
 
-to run rcon commands through the console simply type ```asa raw <command>``` for example ```asa raw destroywilddinos``` some commands have shortcuts such as ```asa players``` to list connected players for a list of current shortcuts just type ```asa ``` in the console.
+To run rcon commands through the console simply type ```asa raw <command>``` for example ```asa raw destroywilddinos``` some commands have shortcuts such as ```asa players``` to list connected players for a list of current shortcuts just type ```asa ``` in the console.
 
 ## Clustering
 
@@ -172,7 +164,7 @@ Each map requires:
 
 All servers in the cluster must use:
 
-- The same Cluster ID dont use "cluster"
+- The same Cluster ID. Do use the default "cluster1" choose a unique ID.
 - The same shared cluster directory
 
 Example:
