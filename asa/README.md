@@ -5,20 +5,21 @@ A Docker container for running ARK: Survival Ascended dedicated servers with a f
 Table of Contents
 
 - [Features](#Features)
-- [QuickStart](#Quick Start)
+- [Quick Start](#QuickStart)
 - [Requirements](#Requirements)
 - [Ports](#Ports)
-- [INIConfiguration](#INI Configuration)
+- [INI Configuration](#INIConfiguration)
 - [Maps](#Maps)
 - [Mods](#Mods)
-- [Extra Server Arguments](#Extra Server Arguments)
+- [Extra Server Arguments](#ExtraServerArguments)
 - [RCON](#RCON)
 - [Clustering](#Clustering)
 - [Updating](#Updating)
 - [Backups](#Backups)
 - [Troubleshooting](#Troubleshooting)
 
-  
+[![Discord](https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logocolor=white)](https://discord.gg/Ha5g7wMPr)
+
 
 ## Features
 
@@ -65,7 +66,7 @@ You have two methods to apply this setting:
 Temporary Setting (resets after system reboot):
 ```bash sudo sysctl -w vm.max_map_count=262144```
 
-    Permanent Setting:
+Permanent Setting:
 
 ```bash echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf sudo sysctl -p```
 Storage
@@ -125,7 +126,7 @@ Servers intended to participate in the same cluster must use the same Cluster ID
 
 ARK: Survival Ascended supports CurseForge mods.
 
-Configure the desired mod IDs using the server’s supported mod startup arguments.
+Configure the desired mod IDs using the server’s supported mod startup arguments when entering mods you should end with a trailing comma. (123456,112345,221342,)
 
 Multiple mods should be specified using the format expected by ARK: Survival Ascended.
 
@@ -149,7 +150,7 @@ Check the wiki for available Arguments.
 
 RCON can be enabled through the container configuration.
 
-To run rcon commands through the console simply type ```asa raw <command>``` for example ```asa raw destroywilddinos``` some commands have shortcuts such as ```asa players``` to list connected players for a list of current shortcuts just type ```asa ``` in the console.
+To run rcon commands through the console simply type ```asa raw <command>``` for example ```asa raw destroywilddinos``` some commands have shortcuts such as ```asa players``` to list connected players. For a list of current shortcuts just type ```asa ``` in the console.
 
 ## Clustering
 
@@ -193,7 +194,7 @@ Always maintain backups of important server data before major ARK updates.
 
 ARK generates save and backup data within its persistent server directories.
 
-For full disaster recovery, back up the server’s persistent data and cluster directory.
+For full disaster recovery, back up the server’s save data and cluster directory.
 
 ## Troubleshooting
 
@@ -209,13 +210,14 @@ Check:
 - Startup arguments
 - Container logs
 - ASA logs
+- Mod list formatting
 
 Server is not discoverable
 
 Verify:
 
 - Game port configuration
-- Docker port mapping
+- Docker port mapping that you added matches the game port.
 - Router/firewall configuration
 - Server startup completed successfully
 
