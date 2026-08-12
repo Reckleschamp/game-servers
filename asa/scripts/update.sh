@@ -8,6 +8,7 @@ install_or_update_server() {
         log "Installing Steam application ${ASA_APP_ID} into ${ASA_DIR}."
 
         "${STEAMCMD}" \
+            +@sSteamCmdForcePlatformType windows \
             +force_install_dir "${ASA_DIR}" \
             +login anonymous \
             +app_update "${ASA_APP_ID}" validate \
@@ -18,6 +19,7 @@ install_or_update_server() {
 
         local update_command=(
             "${STEAMCMD}"
+            +@sSteamCmdForcePlatformType windows
             +force_install_dir "${ASA_DIR}"
             +login anonymous
             +app_update "${ASA_APP_ID}"
