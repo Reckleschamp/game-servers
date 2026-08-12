@@ -2,6 +2,11 @@
 
 install_or_update_server() {
     require_executable "${STEAMCMD}"
+    # Refresh SteamCMD to ensure we have the latest version.
+    log "Updating SteamCMD."
+    "${STEAMCMD}" \
+     +login anonymous \
+     +quit
 
     if [[ ! -f "${ASA_EXE}" ]]; then
         log "ASA is not installed."
