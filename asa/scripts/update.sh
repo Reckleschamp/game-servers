@@ -49,7 +49,7 @@ install_or_update_server() {
 }
 
 run_steamcmd_with_retry() {
-    local max_attempts=5
+    local max_attempts=2
     local attempt=1
     local delay=5
     local acf_path="${ASA_DIR}/steamapps/appmanifest_${ASA_APP_ID}.acf"
