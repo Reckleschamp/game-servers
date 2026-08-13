@@ -1,8 +1,12 @@
-name: Build ASA Release Image
+name: Build ASA Stable Image
 
 on:
-  release:
-    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Docker image version"
+        required: true
+        type: string
 
 jobs:
   build:
@@ -24,7 +28,7 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and Push Release Image
+      - name: Build and Push ASA Release
         uses: docker/build-push-action@v7
         with:
           context: ./asa
@@ -32,7 +36,7 @@ jobs:
           push: true
           platforms: linux/amd64
           tags: |
-            reckleschamp/asa-server:${{ github.event.release.tag_name }}
+            reckleschamp/asa-server:${{ inputs.version }}
             reckleschamp/asa-server:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
